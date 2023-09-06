@@ -4,7 +4,7 @@ namespace DannyXCII\Http;
 
 use Psr\Http\Message\UriInterface;
 
-class Uri implements UriInterface
+class URI implements UriInterface
 {
     private string $scheme;
     private string $host;
