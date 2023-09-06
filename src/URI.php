@@ -33,9 +33,22 @@ class URI implements UriInterface
         return $this->scheme;
     }
 
+    /**
+     * @return string
+     */
     public function getAuthority(): string
     {
-        // TODO: Implement getAuthority() method.
+        $authority = $this->host;
+
+        if (!empty($this->userInfo)) {
+            $authority = sprintf('%s@%s', $this->userInfo, $authority);
+        }
+
+        if (!empty($this->port)) {
+            $authority = sprintf('%s:%s', $authority, $this->port);
+        }
+
+        return $authority;
     }
 
     /**
