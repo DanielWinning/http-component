@@ -13,10 +13,12 @@ class URI implements UriInterface
     private string $path;
     private string $query;
 
-    public function __construct()
+    public function __construct(string $scheme, string $host, string $uriString)
     {
-        $this->host = '';
-        $this->scheme = '';
+        $this->scheme = $scheme;
+        $this->host = $host;
+
+        $this->parseUri($uriString);
     }
 
     private function parseUri(string $uri)
