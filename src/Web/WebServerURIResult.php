@@ -22,7 +22,7 @@ class WebServerURIResult
         $this->scheme = $scheme;
         $this->host = $host;
         $this->port = $port;
-        $this->path = $path;
+        $this->path = strtok($path, '?');
         $this->query = $query;
     }
 
