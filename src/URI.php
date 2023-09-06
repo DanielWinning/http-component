@@ -1,6 +1,6 @@
 <?php
 
-namespace DannyXCII\Http;
+namespace DannyXCII\HttpComponent;
 
 use Psr\Http\Message\UriInterface;
 

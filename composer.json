@@ -1,6 +1,6 @@
 {
     "name": "dannyxcii/http-component",
-    "description": "A Package For Handling HTTP Request/Response Cycle",
+    "description": "A component for handling HTTP Requests/Responses",
     "authors": [
         {
             "name": "Daniel Winning",
@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "DannyXCII\\Http\\": "src/"
+            "DannyXCII\\HttpComponent\\": "src/"
         }
     }
 }

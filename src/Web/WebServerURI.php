@@ -1,6 +1,6 @@
 <?php
 
-namespace DannyXCII\Http\Web;
+namespace DannyXCII\HttpComponent\Web;
 
 class WebServerURI
 {
