@@ -25,7 +25,7 @@ class Request implements RequestInterface
         $this->method = $method;
         $this->uri = $uri;
         $this->headers = $headers;
-        $this->body = $body ?? new Stream(); // You need to implement your Stream class.
+        $this->body = $body ?? new Stream(fopen('php://temp', 'r+'));
         $this->protocolVersion = $protocolVersion;
     }
 
