@@ -1,0 +1,19 @@
+{
+    "name": "dannyxcii/http",
+    "description": "A Package For Handling HTTP Request/Response Cycle",
+    "authors": [
+        {
+            "name": "Daniel Winning",
+            "email": "daniel@winningsoftware.co.uk"
+        }
+    ],
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "psr/http-message": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DannyXCII\\Http\\": "src/"
+        }
+    }
+}
