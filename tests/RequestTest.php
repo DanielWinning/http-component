@@ -20,7 +20,7 @@ class RequestTest extends TestCase
      */
     public function testGetHeaders(): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $this->assertEquals(['content-type' => ['application/json']], $request->getHeaders());
     }
@@ -46,7 +46,7 @@ class RequestTest extends TestCase
      */
     public function testWithHeader(): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $request = $request->withHeader('Content-Type', 'text/html');
 
@@ -60,7 +60,7 @@ class RequestTest extends TestCase
      */
     public function testWithAddedHeader(): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $request = $request->withAddedHeader('Content-Type', 'text/html');
 
@@ -78,7 +78,7 @@ class RequestTest extends TestCase
      */
     public function testHasHeader(string $key): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $this->assertTrue($request->hasHeader($key));
     }
@@ -90,11 +90,23 @@ class RequestTest extends TestCase
      */
     public function testWithoutHeader(): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $request = $request->withoutHeader('CONTENT-TYPE');
 
         $this->assertEquals([], $request->getHeaders());
+    }
+
+    /**
+     * @return void
+     *
+     * @throws MockObjectException
+     */
+    public function testGetHeaderLine(): void
+    {
+        $request = $this->simpleGetRequest();
+
+        $this->assertEquals('application/json', $request->getHeaderLine('content-type'));
     }
 
     /**
@@ -108,7 +120,7 @@ class RequestTest extends TestCase
      */
     public function testWithMethod(string $method): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
 
         $request = $request->withMethod($method);
 
@@ -148,7 +160,7 @@ class RequestTest extends TestCase
      */
     public function testWithUri(): void
     {
-        $request = $this->simpleGet();
+        $request = $this->simpleGetRequest();
         $uri = new URI('https', 'localhost', '/test', 'hello=world');
 
         $request = $request->withUri($uri, true);
@@ -174,7 +186,7 @@ class RequestTest extends TestCase
      *
      * @throws MockObjectException
      */
-    private function simpleGet(): Request
+    private function simpleGetRequest(): Request
     {
         [$uri, $body] = $this->getMockObjects();
 
@@ -199,6 +211,9 @@ class RequestTest extends TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public static function headerKeyProvider(): array
     {
         return [

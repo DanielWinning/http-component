@@ -85,9 +85,7 @@ class Request implements RequestInterface
      */
     public function getHeaderLine(string $name): string
     {
-        $header = $this->getHeader($name);
-
-        return implode(', ', $header);
+        return implode(', ', $this->getHeader($name));
     }
 
     /**
