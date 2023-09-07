@@ -2,9 +2,9 @@
 
 namespace DannyXCII\HttpComponent\Web;
 
-class WebServerURI
+class WebServerUri
 {
-    public static function generate(): WebServerURIResult
+    public static function generate(): WebServerUriResult
     {
         $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'];
@@ -12,6 +12,6 @@ class WebServerURI
         $query = $_SERVER['QUERY_STRING'] ?? '';
         $port = $_SERVER['SERVER_PORT'] ?? null;
 
-        return new WebServerURIResult($scheme, $host, $path, $query, $port);
+        return new WebServerUriResult($scheme, $host, $path, $query, $port);
     }
 }

@@ -3,7 +3,6 @@
 namespace DannyXCII\HttpComponent;
 
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 

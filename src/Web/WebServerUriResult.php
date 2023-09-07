@@ -2,7 +2,7 @@
 
 namespace DannyXCII\HttpComponent\Web;
 
-class WebServerURIResult
+class WebServerUriResult
 {
     private string $scheme;
     private string $host;

@@ -155,6 +155,9 @@ class StreamTest extends TestCase
         $stream->close();
     }
 
+    /**
+     * @return void
+     */
     public function testGetMetadata(): void
     {
         [$stream] = $this->getWritableStreamWithData();

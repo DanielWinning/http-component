@@ -5,7 +5,7 @@ namespace DannyXCII\HttpComponentTests;
 use DannyXCII\HttpComponent\Request;
 use DannyXCII\HttpComponent\Stream;
 use DannyXCII\HttpComponent\StreamBuilder;
-use DannyXCII\HttpComponent\URI;
+use DannyXCII\HttpComponent\Uri;
 use DannyXCII\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
 use PHPUnit\Framework\MockObject\Exception as MockObjectException;
 use PHPUnit\Framework\TestCase;
@@ -133,7 +133,7 @@ class RequestTest extends TestCase
      */
     public function testGetRequestTarget(): void
     {
-        $uri = new URI('https', 'localhost', '/test', 'hello=world');
+        $uri = new Uri('https', 'localhost', '/test', 'hello=world');
         $body = StreamBuilder::build('test');
         $request = new Request('GET', $uri, ['Content-Type' => 'application/json'], $body);
 
@@ -145,7 +145,7 @@ class RequestTest extends TestCase
      */
     public function testWithRequestTarget(): void
     {
-        $uri = new URI('https', 'localhost', '/test', 'hello=world');
+        $uri = new Uri('https', 'localhost', '/test', 'hello=world');
         $body = StreamBuilder::build('test');
         $request = new Request('GET', $uri, ['Content-Type' => 'application/json'], $body);
 
@@ -162,7 +162,7 @@ class RequestTest extends TestCase
     public function testWithUri(): void
     {
         $request = $this->simpleGetRequest();
-        $uri = new URI('https', 'localhost', '/test', 'hello=world');
+        $uri = new Uri('https', 'localhost', '/test', 'hello=world');
 
         $request = $request->withUri($uri, true);
 
@@ -177,7 +177,7 @@ class RequestTest extends TestCase
     private function getMockObjects(): array
     {
         return [
-            $this->createMock(URI::class),
+            $this->createMock(Uri::class),
             $this->createMock(Stream::class),
         ];
     }
