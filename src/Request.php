@@ -2,6 +2,7 @@
 
 namespace DannyXCII\HttpComponent;
 
+use DannyXCII\HttpComponent\Traits\ResolveHeadersTrait;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -9,6 +10,8 @@ use Psr\Http\Message\UriInterface;
 
 class Request implements RequestInterface
 {
+    use ResolveHeadersTrait;
+
     private UriInterface $uri;
     private StreamInterface $body;
     private string $method;
@@ -24,7 +27,7 @@ class Request implements RequestInterface
     ) {
         $this->method = $method;
         $this->uri = $uri;
-        $this->setHeaders($headers);
+        $this->headers = $this->setHeaders($headers);
         $this->body = $body ?? new Stream(fopen('php://temp', 'r+'));
         $this->protocolVersion = $protocolVersion;
     }
@@ -223,17 +226,5 @@ class Request implements RequestInterface
         }
 
         return $request;
-    }
-
-    /**
-     * @param array $headers
-     *
-     * @return void
-     */
-    private function setHeaders(array $headers): void
-    {
-        foreach ($headers as $key => $header) {
-            $this->headers[strtolower($key)] = is_array($header) ? $header : [$header];
-        }
     }
 }

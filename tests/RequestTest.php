@@ -6,13 +6,14 @@ use DannyXCII\HttpComponent\Request;
 use DannyXCII\HttpComponent\Stream;
 use DannyXCII\HttpComponent\StreamBuilder;
 use DannyXCII\HttpComponent\URI;
+use DannyXCII\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
 use PHPUnit\Framework\MockObject\Exception as MockObjectException;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UriInterface;
 
 class RequestTest extends TestCase
 {
+    use ProvidesHeaderDataTrait;
+
     /**
      * @return void
      *
@@ -191,41 +192,5 @@ class RequestTest extends TestCase
         [$uri, $body] = $this->getMockObjects();
 
         return new Request('GET', $uri, ['Content-Type' => 'application/json'], $body);
-    }
-
-    /**
-     * @return array
-     */
-    public static function methodProvider(): array
-    {
-        return [
-            'POST' => [
-                'POST',
-            ],
-            'PUT' => [
-                'PUT',
-            ],
-            'DELETE' => [
-                'DELETE',
-            ],
-        ];
-    }
-
-    /**
-     * @return array[]
-     */
-    public static function headerKeyProvider(): array
-    {
-        return [
-            'Content-Type' => [
-                'Content-Type',
-            ],
-            'content-type' => [
-                'content-type',
-            ],
-            'CONTENT-TYPE' => [
-                'CONTENT-TYPE',
-            ],
-        ];
     }
 }

@@ -2,11 +2,14 @@
 
 namespace DannyXCII\HttpComponent;
 
+use DannyXCII\HttpComponent\Traits\ResolveHeadersTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Response implements ResponseInterface
 {
+    use ResolveHeadersTrait;
+
     private int $statusCode;
     private string $reasonPhrase;
     private array $headers;
@@ -22,7 +25,7 @@ class Response implements ResponseInterface
     ) {
         $this->statusCode = $statusCode;
         $this->reasonPhrase = $reasonPhrase;
-        $this->headers = $headers;
+        $this->headers = $this->setHeaders($headers);
         $this->body = $body ?? new Stream(fopen('php://temp', 'r+'));
         $this->protocolVersion = $protocolVersion;
     }
@@ -114,6 +117,11 @@ class Response implements ResponseInterface
         return $response;
     }
 
+    /**
+     * @param string $name
+     *
+     * @return ResponseInterface
+     */
     public function withoutHeader(string $name): ResponseInterface
     {
         $response = clone $this;
@@ -122,11 +130,19 @@ class Response implements ResponseInterface
         return $response;
     }
 
+    /**
+     * @return StreamInterface
+     */
     public function getBody(): StreamInterface
     {
         return $this->body;
     }
 
+    /**
+     * @param StreamInterface $body
+     *
+     * @return ResponseInterface
+     */
     public function withBody(StreamInterface $body): ResponseInterface
     {
         $response = clone $this;
@@ -134,11 +150,20 @@ class Response implements ResponseInterface
         return $response;
     }
 
+    /**
+     * @return int
+     */
     public function getStatusCode(): int
     {
         return $this->statusCode;
     }
 
+    /**
+     * @param $code
+     * @param $reasonPhrase
+     *
+     * @return ResponseInterface
+     */
     public function withStatus($code, $reasonPhrase = ''): ResponseInterface
     {
         $response = clone $this;
@@ -147,6 +172,9 @@ class Response implements ResponseInterface
         return $response;
     }
 
+    /**
+     * @return string
+     */
     public function getReasonPhrase(): string
     {
         return $this->reasonPhrase;
