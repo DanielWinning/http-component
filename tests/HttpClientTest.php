@@ -60,4 +60,55 @@ class HttpClientTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
     }
+
+    /**
+     * @return void
+     */
+    public function testGet(): void
+    {
+        $this->assertEquals(200, (new HttpClient())->get(...$this->getDummyRequestData())->getStatusCode());
+    }
+
+    /**
+     * @return void
+     */
+    public function testPost(): void
+    {
+        $this->assertEquals(200, (new HttpClient())->post(...$this->getDummyRequestData())->getStatusCode());
+    }
+
+    /**
+     * @return void
+     */
+    public function testPut(): void
+    {
+        $this->assertEquals(200, (new HttpClient())->put(...$this->getDummyRequestData())->getStatusCode());
+    }
+
+    /**
+     * @return void
+     */
+    public function testPatch(): void
+    {
+        $this->assertEquals(200, (new HttpClient())->patch(...$this->getDummyRequestData())->getStatusCode());
+    }
+
+    /**
+     * @return void
+     */
+    public function testDelete(): void
+    {
+        $this->assertEquals(200, (new HttpClient())->delete(...$this->getDummyRequestData())->getStatusCode());
+    }
+
+    private function getDummyRequestData(): array
+    {
+        return [
+            'http://localhost:8000/tests/api.php',
+            [
+                'Content-Type' => 'application/json',
+            ],
+            ''
+        ];
+    }
 }

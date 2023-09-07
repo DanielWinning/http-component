@@ -5,6 +5,7 @@ namespace DannyXCII\HttpComponent;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 class HttpClient implements ClientInterface
 {
@@ -19,24 +20,110 @@ class HttpClient implements ClientInterface
 
         $this->setCurlOptions($curl, $request);
 
-        $responseText = curl_exec($curl);
+        $responseText = $this->getRawResponse($curl);
 
-        if (curl_errno($curl)) {
-            throw new \RuntimeException(sprintf('cURL error: %s', curl_error($curl)));
-        }
-
-        curl_close($curl);
-
-        $response = new Response();
-        $response = $response->withStatus(curl_getinfo($curl, CURLINFO_HTTP_CODE));
-
+        $response = (new Response())->withStatus(curl_getinfo($curl, CURLINFO_HTTP_CODE));
         $headerSize = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
-
         $response = $this->parseHeaders($response, $responseText, $headerSize);
 
-        $responseBody = substr($responseText, $headerSize);
+        return $response->withBody(StreamBuilder::build(substr($responseText, $headerSize)));
+    }
 
-        return $response->withBody(StreamBuilder::build($responseBody));
+    /**
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    public function get(string $endpoint, array $headers = [], string $body = ''): ResponseInterface
+    {
+        return $this->buildAndSend('GET', $endpoint, $headers, $body);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    public function post(string $endpoint, array $headers = [], string $body = ''): ResponseInterface
+    {
+        return $this->buildAndSend('POST', $endpoint, $headers, $body);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    public function put(string $endpoint, array $headers = [], string $body = ''): ResponseInterface
+    {
+        return $this->buildAndSend('PUT', $endpoint, $headers, $body);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    public function patch(string $endpoint, array $headers = [], string $body = ''): ResponseInterface
+    {
+        return $this->buildAndSend('PATCH', $endpoint, $headers, $body);
+    }
+
+    /**
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    public function delete(string $endpoint, array $headers = [], string $body = ''): ResponseInterface
+    {
+        return $this->buildAndSend('DELETE', $endpoint, $headers, $body);
+    }
+
+    /**
+     * @param string $method
+     * @param string $endpoint
+     * @param array $headers
+     * @param string $body
+     *
+     * @return ResponseInterface
+     */
+    private function buildAndSend(string $method, string $endpoint, array $headers, string $body): ResponseInterface
+    {
+        $request = new Request($method, $this->buildUriFromEndpoint($endpoint), $headers, StreamBuilder::build($body));
+
+        return $this->sendRequest($request);
+    }
+
+    /**
+     * @param string $endpoint
+     *
+     * @return UriInterface
+     */
+    private function buildUriFromEndpoint(string $endpoint): UriInterface
+    {
+        if (!parse_url($endpoint, PHP_URL_SCHEME)) {
+            $endpoint = 'https://' . $endpoint;
+        }
+
+        $parts = parse_url($endpoint);
+
+        return new Uri(
+            $parts['scheme'],
+            $parts['host'] ?? '',
+            $parts['path'] ?? '/',
+            $parts['query'] ?? '',
+            $parts['port'] ?? ''
+        );
     }
 
     /**
@@ -50,7 +137,7 @@ class HttpClient implements ClientInterface
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $request->getMethod());
         curl_setopt($curl, CURLOPT_URL, $request->getUri()->__toString());
         curl_setopt($curl, CURLOPT_HEADER, 1);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $request->getHeaders());
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $request->getFlatHeaders());
         curl_setopt($curl, CURLOPT_POSTFIELDS, $request->getBody()->getContents());
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);

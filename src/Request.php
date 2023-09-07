@@ -227,4 +227,20 @@ class Request implements RequestInterface
 
         return $request;
     }
+
+    /**
+     * @return array
+     */
+    public function getFlatHeaders(): array
+    {
+        $headerStrings = [];
+
+        foreach ($this->headers as $header => $values) {
+            foreach ($values as $value) {
+                $headerStrings[] = "$header: $value";
+            }
+        }
+
+        return $headerStrings;
+    }
 }

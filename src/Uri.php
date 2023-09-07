@@ -14,11 +14,11 @@ class Uri implements UriInterface
     private string $fragment;
     private string $userInfo;
 
-    public function __construct(string $scheme, string $host, string $path, string $query, ?string $port = null)
+    public function __construct(string $scheme, string $host, string $path, string $query, string|int $port = null)
     {
         $this->scheme = $scheme;
         $this->host = $host;
-        $this->port = $port;
+        $this->port = (string) $port;
         $this->path = $path;
         $this->query = $query;
         $this->fragment = '';
@@ -72,7 +72,7 @@ class Uri implements UriInterface
      */
     public function getPort(): ?int
     {
-        return $this->port;
+        return (int) $this->port;
     }
 
     /**
