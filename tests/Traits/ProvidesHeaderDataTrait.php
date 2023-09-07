@@ -19,6 +19,12 @@ trait ProvidesHeaderDataTrait
             'DELETE' => [
                 'DELETE',
             ],
+            'GET' => [
+                'GET',
+            ],
+            'PATCH' => [
+                'PATCH',
+            ]
         ];
     }
 
