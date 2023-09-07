@@ -24,7 +24,7 @@ class Request implements RequestInterface
     ) {
         $this->method = $method;
         $this->uri = $uri;
-        $this->headers = $headers;
+        $this->setHeaders($headers);
         $this->body = $body ?? new Stream(fopen('php://temp', 'r+'));
         $this->protocolVersion = $protocolVersion;
     }
@@ -112,8 +112,9 @@ class Request implements RequestInterface
      */
     public function withAddedHeader(string $name, $value): MessageInterface
     {
+        $name = strtolower($name);
         $request = clone $this;
-        $request->headers[$name] = array_merge($this->headers[$name] ?? [], is_array($value) ? $value : []);
+        $request->headers[$name] = array_merge($this->headers[$name] ?? [], is_array($value) ? $value : [$value]);
 
         return $request;
     }
@@ -157,7 +158,12 @@ class Request implements RequestInterface
      */
     public function getRequestTarget(): string
     {
-        return $this->uri->getPath() ?: '/';
+        $path = $this->uri->getPath();
+        $query = $this->uri->getQuery();
+
+        return $path
+            ? ($query ? sprintf('%s?%s', $path, $query) : $path)
+            : ($query ? sprintf('/?%s', $query) : '/');
     }
 
     /**
@@ -168,7 +174,8 @@ class Request implements RequestInterface
     public function withRequestTarget(string $requestTarget): RequestInterface
     {
         $request = clone $this;
-        $request->uri = $request->uri->withPath($requestTarget);
+        $request->uri = $request->uri->withPath(strtok($requestTarget, '?'));
+        $request->uri = $request->uri->withQuery(substr(strstr($requestTarget, '?'), 1));
 
         return $request;
     }
@@ -214,10 +221,21 @@ class Request implements RequestInterface
         $request->uri = $uri;
 
         if (!$preserveHost) {
-            $hostHeader = $request->getHeaderLine('host');
-            $request->uri = $request->uri->withHost($hostHeader);
+            $request->uri = $request->uri->withHost($request->getHeaderLine('host'));
         }
 
         return $request;
+    }
+
+    /**
+     * @param array $headers
+     *
+     * @return void
+     */
+    private function setHeaders(array $headers): void
+    {
+        foreach ($headers as $key => $header) {
+            $this->headers[strtolower($key)] = is_array($header) ? $header : [$header];
+        }
     }
 }

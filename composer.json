@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "DannyXCII\\HttpComponent\\": "src/"
+            "DannyXCII\\HttpComponent\\": "src/",
+            "DannyXCII\\HttpComponentTests\\": "tests/"
         }
     },
     "version": "1.1.0"
