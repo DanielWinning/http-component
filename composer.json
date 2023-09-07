@@ -9,7 +9,9 @@
     ],
     "license": "GPL-3.0-or-later",
     "require": {
-        "psr/http-message": "^2.0"
+        "psr/http-message": "^2.0",
+        "psr/http-client": "^1.0",
+        "ext-curl": "*"
     },
     "autoload": {
         "psr-4": {
