@@ -15,6 +15,7 @@ class Stream implements StreamInterface
         }
 
         $this->resource = $resource;
+        $this->rewind();
     }
 
     /**
@@ -38,10 +39,11 @@ class Stream implements StreamInterface
     /**
      * @return resource
      */
-    public function detach()
+    public function detach(): mixed
     {
         $resource = $this->resource;
         $this->resource = null;
+
         return $resource;
     }
 
@@ -104,12 +106,12 @@ class Stream implements StreamInterface
     }
 
     /**
-     * @param $offset
-     * @param $whence
+     * @param int $offset
+     * @param int $whence
      *
      * @return void
      */
-    public function seek($offset, $whence = SEEK_SET): void
+    public function seek(int $offset, int $whence = SEEK_SET): void
     {
         if (!$this->isSeekable()) {
             throw new \RuntimeException('Stream is not seekable');
@@ -143,11 +145,11 @@ class Stream implements StreamInterface
     }
 
     /**
-     * @param $string
+     * @param string $string
      *
      * @return int
      */
-    public function write($string): int
+    public function write(string $string): int
     {
         if (!$this->isWritable()) {
             throw new \RuntimeException('Stream is not writable');
@@ -177,11 +179,11 @@ class Stream implements StreamInterface
     }
 
     /**
-     * @param $length
+     * @param int $length
      *
      * @return string
      */
-    public function read($length): string
+    public function read(int $length): string
     {
         if (!$this->isReadable()) {
             throw new \RuntimeException('Stream is not readable');
@@ -215,11 +217,11 @@ class Stream implements StreamInterface
     }
 
     /**
-     * @param $key
+     * @param mixed $key
      *
-     * @return array|null
+     * @return mixed
      */
-    public function getMetadata($key = null): ?array
+    public function getMetadata(mixed $key = null): mixed
     {
         if (!$this->resource) {
             return $key ? null : [];
