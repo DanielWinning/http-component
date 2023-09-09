@@ -2,16 +2,25 @@
 
 namespace DannyXCII\HttpComponent\Web;
 
+use DannyXCII\HttpComponent\Uri;
+
 class WebServerUri
 {
-    public static function generate(): WebServerUriResult
+    /**
+     * @return Uri
+     */
+    public static function generate(): Uri
     {
         $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];
-        $path = $_SERVER['REQUEST_URI'];
-        $query = $_SERVER['QUERY_STRING'] ?? '';
-        $port = $_SERVER['SERVER_PORT'] ?? null;
+        $urlParts = parse_url($scheme . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+        $host = $urlParts['host'];
 
-        return new WebServerUriResult($scheme, $host, $path, $query, $port);
+        return new Uri(
+            $scheme,
+            $host,
+            $urlParts['path'],
+            $urlParts['query'] ?? '',
+            $urlParts['port'] ?? ($_SERVER['SERVER_PORT'] ?? null)
+        );
     }
 }
