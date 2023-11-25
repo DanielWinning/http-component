@@ -7,6 +7,9 @@
             "email": "daniel@winningsoftware.co.uk"
         }
     ],
+    "scripts": {
+        "test": "php -d xdebug.mode=coverage ./vendor/bin/phpunit --testdox --colors=always --coverage-html coverage --coverage-clover coverage/coverage.xml --testdox-html coverage/testdox.html && npx badger --phpunit ./coverage/coverage.xml && npx badger --version ./composer.json && npx badger --license ./composer.json"
+    },
     "license": "GPL-3.0-or-later",
     "require": {
         "psr/http-message": "^2.0",
