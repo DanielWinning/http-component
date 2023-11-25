@@ -1,6 +1,6 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests\Traits;
+namespace Luma\HttpComponentTests\Traits;
 
 trait ProvidesHeaderDataTrait
 {

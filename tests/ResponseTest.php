@@ -1,9 +1,9 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests;
+namespace Luma\HttpComponentTests;
 
-use DannyXCII\HttpComponent\Response;
-use DannyXCII\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
+use Luma\HttpComponent\Response;
+use Luma\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
 use PHPUnit\Framework\TestCase;
 
 class ResponseTest extends TestCase

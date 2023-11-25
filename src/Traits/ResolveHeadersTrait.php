@@ -1,6 +1,6 @@
 <?php
 
-namespace DannyXCII\HttpComponent\Traits;
+namespace Luma\HttpComponent\Traits;
 
 trait ResolveHeadersTrait
 {

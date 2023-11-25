@@ -1,11 +1,11 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests;
+namespace Luma\HttpComponentTests;
 
-use DannyXCII\HttpComponent\HttpClient;
-use DannyXCII\HttpComponent\Request;
-use DannyXCII\HttpComponent\Uri;
-use DannyXCII\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
+use Luma\HttpComponent\HttpClient;
+use Luma\HttpComponent\Request;
+use Luma\HttpComponent\Uri;
+use Luma\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
 use PHPUnit\Framework\TestCase;
 
 class HttpClientTest extends TestCase

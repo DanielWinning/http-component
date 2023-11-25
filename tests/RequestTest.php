@@ -1,12 +1,12 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests;
+namespace Luma\HttpComponentTests;
 
-use DannyXCII\HttpComponent\Request;
-use DannyXCII\HttpComponent\Stream;
-use DannyXCII\HttpComponent\StreamBuilder;
-use DannyXCII\HttpComponent\Uri;
-use DannyXCII\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
+use Luma\HttpComponent\Request;
+use Luma\HttpComponent\Stream;
+use Luma\HttpComponent\StreamBuilder;
+use Luma\HttpComponent\Uri;
+use Luma\HttpComponentTests\Traits\ProvidesHeaderDataTrait;
 use PHPUnit\Framework\MockObject\Exception as MockObjectException;
 use PHPUnit\Framework\TestCase;
 

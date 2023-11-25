@@ -1,8 +1,8 @@
 <?php
 
-namespace DannyXCII\HttpComponent;
+namespace Luma\HttpComponent;
 
-use DannyXCII\HttpComponent\Traits\ResolveHeadersTrait;
+use Luma\HttpComponent\Traits\ResolveHeadersTrait;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\StreamInterface;

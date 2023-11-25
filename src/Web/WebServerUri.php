@@ -1,8 +1,8 @@
 <?php
 
-namespace DannyXCII\HttpComponent\Web;
+namespace Luma\HttpComponent\Web;
 
-use DannyXCII\HttpComponent\Uri;
+use Luma\HttpComponent\Uri;
 
 class WebServerUri
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace DannyXCII\HttpComponent;
+namespace Luma\HttpComponent;
 
 use Psr\Http\Message\StreamInterface;
 

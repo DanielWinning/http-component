@@ -1,8 +1,8 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests;
+namespace Luma\HttpComponentTests;
 
-use DannyXCII\HttpComponent\Stream;
+use Luma\HttpComponent\Stream;
 use PHPUnit\Framework\TestCase;
 
 class StreamTest extends TestCase

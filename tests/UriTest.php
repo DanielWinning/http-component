@@ -1,8 +1,8 @@
 <?php
 
-namespace DannyXCII\HttpComponentTests;
+namespace Luma\HttpComponentTests;
 
-use DannyXCII\HttpComponent\Uri;
+use Luma\HttpComponent\Uri;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UriInterface;
 
