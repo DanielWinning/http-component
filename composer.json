@@ -1,5 +1,5 @@
 {
-    "name": "dannyxcii/http-component",
+    "name": "lumax/http-component",
     "description": "A component for handling HTTP Requests/Responses",
     "authors": [
         {
@@ -25,5 +25,5 @@
             "DannyXCII\\HttpComponentTests\\": "tests/"
         }
     },
-    "version": "2.0.1"
+    "version": "2.0.2"
 }
