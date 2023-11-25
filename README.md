@@ -1,4 +1,4 @@
-# HTTP Component
+# Luma | HTTP Component
 
 <div>
 <!-- Version Badge -->
