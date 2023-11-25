@@ -18,7 +18,7 @@ HTTP messages, making it compatible with other libraries and frameworks that als
 You can install this library using Composer:
 
 ```bash
-composer require dannyxcii/http-component
+composer require lumax/http-component
 ```
 
 ## Features
