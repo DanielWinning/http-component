@@ -2,7 +2,7 @@
 
 <div>
 <!-- Version Badge -->
-<img src="https://img.shields.io/badge/Version-2.0.4-blue" alt="Version 2.0.4">
+<img src="https://img.shields.io/badge/Version-2.0.5-blue" alt="Version 2.0.5">
 <!-- PHP Coverage Badge -->
 <img src="https://img.shields.io/badge/PHP Coverage-80.46%25-yellow" alt="PHP Coverage 80.46%">
 <!-- License Badge -->
@@ -53,10 +53,10 @@ This HTTP Component package provides the following key features:
 ### Creating an HTTP Request
 
 ```php
-use DannyXCII\HttpComponent\HttpClient;
-use DannyXCII\HttpComponent\Request;
-use DannyXCII\HttpComponent\StreamBuilder;
-use DannyXCII\HttpComponent\Uri;
+use Luma\HttpComponent\HttpClient;
+use Luma\HttpComponent\Request;
+use Luma\HttpComponent\StreamBuilder;
+use Luma\HttpComponent\Uri;
 
 // Create a URI
 $uri = new Uri('https', 'example.com', '/');
@@ -86,7 +86,7 @@ $body = $response->getBody()->getContents();
 ### Creating an HTTP Client
 
 ```php
-use DannyXCII\HttpComponent\HttpClient;
+use Luma\HttpComponent\HttpClient;
 
 // Create an HTTP client
 $client = new HttpClient();
@@ -105,7 +105,7 @@ $response = $client->post(
 ### Working with Streams
 
 ```php
-use DannyXCII\HttpComponent\StreamBuilder;
+use Luma\HttpComponent\StreamBuilder;
 
 // Create a stream from a string
 $stream = StreamBuilder::build('Hello, World!');
@@ -126,8 +126,8 @@ $contents = $stream->getContents();
 ### URI Handling
 
 ```php
-use DannyXCII\HttpComponent\Uri;
-use DannyXCII\HttpComponent\Web\WebServerUri;
+use Luma\HttpComponent\Uri;
+use Luma\HttpComponent\Web\WebServerUri;
 
 // Create a URI
 $uri = new Uri('https', 'example.com', '/api/resource');

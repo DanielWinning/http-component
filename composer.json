@@ -21,9 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Luma\\HttpComponent\\": "src/",
+            "Luma\\HttpComponent\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Luma\\HttpComponentTests\\": "tests/"
         }
     },
-    "version": "2.0.4"
+    "version": "2.0.5"
 }
