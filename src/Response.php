@@ -100,6 +100,7 @@ class Response implements ResponseInterface
         $response = clone $this;
         $name = strtolower($name);
         $response->headers[$name] = is_array($value) ? $value : [$value];
+
         return $response;
     }
 
@@ -114,6 +115,7 @@ class Response implements ResponseInterface
         $response = clone $this;
         $name = strtolower($name);
         $response->headers[$name] = array_merge($this->headers[$name] ?? [], is_array($value) ? $value : [$value]);
+
         return $response;
     }
 
@@ -127,6 +129,7 @@ class Response implements ResponseInterface
         $response = clone $this;
         $name = strtolower($name);
         unset($response->headers[$name]);
+
         return $response;
     }
 
@@ -147,6 +150,7 @@ class Response implements ResponseInterface
     {
         $response = clone $this;
         $response->body = $body;
+
         return $response;
     }
 
@@ -169,6 +173,7 @@ class Response implements ResponseInterface
         $response = clone $this;
         $response->statusCode = $code;
         $response->reasonPhrase = $reasonPhrase;
+
         return $response;
     }
 
