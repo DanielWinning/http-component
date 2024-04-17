@@ -170,6 +170,30 @@ class RequestTest extends TestCase
     }
 
     /**
+     * @return void
+     *
+     * @throws MockObjectException
+     */
+    public function testGetData(): void
+    {
+        // application/json
+        $uri = $this->createMock(Uri::class);
+        $body = StreamBuilder::build('{"key":"value"}');
+        $request = new Request('GET', $uri, ['Content-Type' => 'application/json'], $body);
+        $this->assertEquals(['key' => 'value'], $request->getData());
+
+        // application/x-www-form-urlencoded
+        $body = StreamBuilder::build('key=value');
+        $request = new Request('GET', $uri, ['Content-Type' => 'application/x-www-form-urlencoded'], $body);
+        $this->assertEquals(['key' => 'value'], $request->getData());
+
+        // other
+        $body = StreamBuilder::build('key=value');
+        $request = new Request('GET', $uri, ['Content-Type' => 'text/plain'], $body);
+        $this->assertEquals([], $request->getData());
+    }
+
+    /**
      * @return array
      *
      * @throws MockObjectException

@@ -243,4 +243,23 @@ class Request implements RequestInterface
 
         return $headerStrings;
     }
+
+    /**
+     * @return array
+     */
+    public function getData(): array
+    {
+        $contentType = $this->getHeaderLine('Content-Type');
+        $bodyContents = $this->getBody()->getContents();
+
+        if ($contentType === 'application/json') {
+            $data = json_decode($bodyContents, true);
+        } else if ($contentType === 'application/x-www-form-urlencoded') {
+            parse_str($bodyContents, $data);
+        } else {
+            $data = [];
+        }
+
+        return $data;
+    }
 }
