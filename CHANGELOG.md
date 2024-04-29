@@ -1,6 +1,28 @@
 # Luma | HTTP Component Changelog
 
-## [2.2.0] - 2024-04-17
+
+## [2.2.1] - 2024-04-30
+### Added
+- N/A
+
+### Changed
+- N/A
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- Fix for subsequent calls to `Request::get()` returning null - rewind stream after reading.
+
+### Security
+- N/A
+
+---
+
+## [2.2.0] - 2024-04-29
 ### Added
 - Added `get` method to `Request`
 

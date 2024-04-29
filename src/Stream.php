@@ -213,6 +213,8 @@ class Stream implements StreamInterface
             throw new \RuntimeException('Error getting stream contents');
         }
 
+        $this->rewind();
+
         return $contents;
     }
 
