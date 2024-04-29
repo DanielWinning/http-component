@@ -262,4 +262,14 @@ class Request implements RequestInterface
 
         return $data;
     }
+
+    /**
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function get(string $key): mixed
+    {
+        return $this->getData()[$key] ?? null;
+    }
 }
