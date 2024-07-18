@@ -272,4 +272,27 @@ class Request implements RequestInterface
     {
         return $this->getData()[$key] ?? null;
     }
+
+    /**
+     * @param string $name
+     * @param string|null $default
+     *
+     * @return string|null
+     */
+    public function getQueryParam(string $name, ?string $default = null): ?string
+    {
+        return $this->getQueryParams()[$name] ?? $default;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getQueryParams(): array
+    {
+        $queryParams = [];
+
+        parse_str($this->uri->getQuery(), $queryParams);
+
+        return $queryParams;
+    }
 }

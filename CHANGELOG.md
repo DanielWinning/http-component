@@ -1,5 +1,25 @@
 # Luma | HTTP Component Changelog
 
+## [2.3.0] - 2024-07-18
+### Added
+- Add `getQueryParam(string $name, ?string $default = null)` method to `Request`
+
+### Changed
+- N/A
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
+---
 
 ## [2.2.1] - 2024-04-30
 ### Added
